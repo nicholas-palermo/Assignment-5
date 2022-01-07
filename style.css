@@ -1,0 +1,21 @@
+body{
+    background-color: lavender;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+}
+
+#title {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 0px;
+}
+
+h2 {
+    text-align: center;
+    font-size: large;
+    font-style: italic;
+    margin-bottom: 15px;
+}
