@@ -1,9 +1,15 @@
+$(document).ready(function () {
 
-//Change box color on click
+    //Change box color on click
+    $('.box').click(function () {
+        const color = document.querySelector("#colorChoiceInd").value;
+        $(this).css('background-color', color);
+        $(this).removeClass('white');
+    })
 
-$('.box').click(function () {
-    const color = document.querySelector("#colorChoiceInd").value;
-    $(this).css('background-color', color);
+    
+
+
 
 })
 
