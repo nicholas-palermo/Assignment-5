@@ -1,11 +1,87 @@
 $(document).ready(function () {
 
+    //Add row of boxes to the bottom of the grid
+    $('#addRow').click(function () {
+        console.log("add row");
+        const existingRow = document.querySelector(".row");
+        console.log(existingRow);
+        const grid = document.querySelector(".grid");
+        console.log(grid);
+        let rowBoxes = existingRow.querySelectorAll(".box")
+        console.log(rowBoxes);
+        
+        rowBoxes.forEach(element => {
+            let color = element.style.backgroundColor
+            if (color !== "") {
+                element.classList.remove(color);
+                element.classList.add('white');
+            }
+        });
+
+
+        let newRow = existingRow.cloneNode(true);
+        $(newRow.childNodes).css('backgroundColor', 'white');
+       
+        console.log(newRow);
+        
+        grid.appendChild(newRow);
+
+        console.log();
+    })
+
+
+    //delete the last row of boxes
+    $('#deleteRow').click(function () {
+        console.log("delete row");
+        let rows = document.querySelectorAll('.row');
+        console.log(rows);
+        let lastRow = rows[rows.length - 1];
+        lastRow.parentNode.removeChild(lastRow);
+    })
+
+    //add columns to last column
+    $('#addCol').click(function () {
+        console.log("add column");
+        let rows = document.querySelectorAll('.row');
+        console.log(rows);
+        let box = document.querySelector('.box');
+        let newBox = box.cloneNode(true);
+        console.log(newBox);
+        let color = box.style.backgroundColor
+            if (color !== "") {
+                newBox.classList.remove(color);
+                newBox.classList.add('white');
+            }
+        $(newBox).css('backgroundColor', 'white');
+
+        rows.forEach(element => {
+            console.log(element);
+            console.log(newBox);
+            element.appendChild(newBox.cloneNode(true));
+        });
+    })
+
+    //delete columns
+    $('#deleteCol').click(function () {
+        console.log("delete column");
+        let rows = document.querySelectorAll('.row');
+        console.log(rows);
+        rows.forEach(element => {
+            element.lastChild.remove();
+        });
+    })
+
+
     //Change box color on click
     $('.box').click(function () {
+        console.log("click works");
         const prevColor = this.style.backgroundColor;
         const color = document.querySelector("#colorChoiceInd").value;
-        $(this).removeClass('white');
-        $(this).removeClass(prevColor);
+        if (prevColor === "") {
+            $(this).removeClass('white');
+        } else {
+            $(this).removeClass(prevColor);
+        }
         $(this).css('background-color', color);
         $(this).addClass(color);
     })
@@ -28,9 +104,6 @@ $(document).ready(function () {
         const allBoxes = document.querySelectorAll(".box")
         const fillColor = document.querySelector("#colorChoiceAll").value;
 
-        //console.log(allBoxes);
-        //console.log(fillColor);
-
         allBoxes.forEach(element => {
             var prevColor = element.style.backgroundColor
             if (prevColor === "") {
@@ -40,14 +113,14 @@ $(document).ready(function () {
             element.classList.add(fillColor);
         });
 
-        console.log(allBoxes);
-
         $(allBoxes).css('background-color', fillColor);
     }) 
 
 
 })
 
+
+//reload page to reset grid
 function reset() {
     location.reload();
 }
