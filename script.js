@@ -70,55 +70,56 @@ $(document).ready(function () {
             element.lastChild.remove();
         });
     })
-
-
-    //Change box color on click
-    $('.box').click(function () {
-        console.log("click works");
-        const prevColor = this.style.backgroundColor;
-        const color = document.querySelector("#colorChoiceInd").value;
-        if (prevColor === "") {
-            $(this).removeClass('white');
-        } else {
-            $(this).removeClass(prevColor);
-        }
-        $(this).css('background-color', color);
-        $(this).addClass(color);
-    })
-
-    //Fill all white boxes with selected color
-    $('#fillWhite').click(function () {
-        const whiteBoxes = document.querySelectorAll(".box" && ".white")
-        const fillColor = document.querySelector("#colorChoiceAllWhite").value;
-
-        whiteBoxes.forEach(element => {
-            element.classList.remove('white');
-            element.classList.add(fillColor);
-        });
-
-        $(whiteBoxes).css('background-color', fillColor)
-    }) 
-
-    //Fill all white boxes with selected color
-    $('#fillAll').click(function () {
-        const allBoxes = document.querySelectorAll(".box")
-        const fillColor = document.querySelector("#colorChoiceAll").value;
-
-        allBoxes.forEach(element => {
-            var prevColor = element.style.backgroundColor
-            if (prevColor === "") {
-                prevColor = 'white';
-            }
-            element.classList.remove(prevColor);
-            element.classList.add(fillColor);
-        });
-
-        $(allBoxes).css('background-color', fillColor);
-    }) 
-
-
 })
 
+
+
+//Change box color on click including dynamically created boxes
+document.querySelector(".grid").addEventListener("click", function (e) {     
+    if (e.target.classList.contains("box")) {
+        console.log("click works");
+        const prevColor = e.target.style.backgroundColor;
+        const color = document.querySelector("#colorChoiceInd").value;
+        if (prevColor === "") {
+            $(e.target).removeClass('white');
+        } else {
+            $(e.target).removeClass(prevColor);
+        }
+        $(e.target).css('background-color', color);
+        $(e.target).addClass(color);
+    }
+})
+
+
+//Fill all white boxes with selected color
+$('#fillWhite').click(function () {
+    const whiteBoxes = document.querySelectorAll(".box" && ".white")
+    const fillColor = document.querySelector("#colorChoiceAllWhite").value;
+
+    whiteBoxes.forEach(element => {
+        element.classList.remove('white');
+        element.classList.add(fillColor);
+    });
+
+    $(whiteBoxes).css('background-color', fillColor)
+}) 
+
+//Fill all white boxes with selected color
+$('#fillAll').click(function () {
+    const allBoxes = document.querySelectorAll(".box")
+    const fillColor = document.querySelector("#colorChoiceAll").value;
+
+    allBoxes.forEach(element => {
+        var prevColor = element.style.backgroundColor
+        if (prevColor === "") {
+            prevColor = 'white';
+        }
+        element.classList.remove(prevColor);
+        element.classList.add(fillColor);
+    });
+
+    $(allBoxes).css('background-color', fillColor);
+}) 
 
 //reload page to reset grid
 function reset() {
